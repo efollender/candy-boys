@@ -3,7 +3,7 @@ const React = require('react');
 let Soundcloud = React.createClass({
 	render(){
 		return (
-			<div></div>
+			<div id="tracks"></div>
 		);
 	}
 });
