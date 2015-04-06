@@ -5,7 +5,7 @@ let Home = React.createClass({
 	render(){
 		return (
       <div id="jumbotron">
-        <div class="large-3 columns">
+        <div className="large-3 columns">
         	<Navigation />
         </div>
       </div>
