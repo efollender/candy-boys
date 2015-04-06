@@ -5,9 +5,9 @@ const {RouteHandler} = Router;
 let Main = React.createClass({
 	render(){
 		return (
-			<body>
+			<div className="container">
 				<RouteHandler />
-			</body>
+			</div>
 		);
 	}
 });
