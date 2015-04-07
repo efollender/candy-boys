@@ -1,29 +1,33 @@
 const React = require('react');
 const TourDate = require('./TourDate');
-const TourStore = require('../stores/TourStore');
+const FirebaseStore = require('../stores/FirebaseStore');
 const ViewActions = require('../actions/ViewActions');
 
 let TourContainer = React.createClass({
 	getInitialState(){
-		return TourStore.getState();
+		return FirebaseStore.getState();
 	},
-	componentDidMount(){
+	componentWillMount(){
 		ViewActions.getTourDates();
-		TourStore.addChangeListener(this._onChange);
+		FirebaseStore.addChangeListener(this._onChange);
+	},
+	componentWillUnmount(){
+		FirebaseStore.removeChangeListener(this._onChange);
 	},
 	_onChange(){
-		this.setState(TourStore.getState());
+		this.setState(FirebaseStore.getState());
 	},
 	render(){
-		let tour = this.state.dates.map(function(el){
+		console.log('state?',this.state.dates);
+		let tourDates = this.state.dates.map(function(el, index){
 			return (
-				<TourDate date={el} />
+				<TourDate key={index} date={el} />
 			);
 		});
 		return (
 			<div id="tourdates-wrap" className="row">
-        <div id="tourdates" className="tour-dates small-12 columns">
-          {tour}
+        <div id="tourdates" className="tour-dates">
+          {tourDates}
         </div>
       </div>
 		);

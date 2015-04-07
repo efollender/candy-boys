@@ -1,15 +1,26 @@
 const React = require('react');
 const Router = require('react-router');
 const {Link} = Router;
-const LinksStore = require('../stores/LinksStore');
+const FirebaseStore = require('../stores/FirebaseStore');
+const ViewActions = require('../actions/ViewActions');
 
 let Navigation = React.createClass({
-	// getInitialState(){
-	// 	return LinksStore.getState();
-	// },
+	getInitialState(){
+		return FirebaseStore.getState();
+	},
+	componentWillMount(){
+		ViewActions.getLinks();
+		FirebaseStore.addChangeListener(this._onChange);
+	},
 	componentDidMount(){
 		let sideNav = document.getElementsByClassName('side-nav')[0];
 		sideNav.className = 'side-nav mounted';
+	},
+	componentWillUnmount(){
+		FirebaseStore.removeChangeListener(this._onChange);
+	},
+	_onChange(){
+		this.setState(FirebaseStore.getState());
 	},
 	render(){
 		return (

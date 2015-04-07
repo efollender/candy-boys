@@ -6,10 +6,10 @@ let TourDate = React.createClass({
 		let venue = date.venue || 'TBA';
 		let formattedDate = date.date.month + " " + date.date.day;
 		return (
-			<div className="medium-3 columns tourDate">
+			<div className="large-3 medium-6 small-12 columns tourDate">
         <h4>{ date.city }, { date.state }</h4>
         <p>@ { venue }<br/>
-        			{ date }
+        			{ formattedDate }
         </p>
       </div>
 		);

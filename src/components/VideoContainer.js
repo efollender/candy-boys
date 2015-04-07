@@ -1,26 +1,34 @@
 const React = require('react');
 const VideoComponent = require('./Video');
-const VideoStore = require('../stores/VideoStore');
+const FirebaseStore = require('../stores/FirebaseStore');
+const ViewActions = require('../actions/ViewActions');
 
 let VideoContainer = React.createClass({
 	getInitialState(){
-		return VideoStore.getState();
+		return FirebaseStore.getState();
+	},
+	componentWillMount(){
+		ViewActions.getVideos();
+		FirebaseStore.addChangeListener(this._onChange);
+	},
+	componentWillUnmount(){
+		FirebaseStore.removeChangeListener(this._onChange);
+	},
+	_onChange(){
+		this.setState(FirebaseStore.getState());
 	},
 	render(){
-		let videos = this.state.videos.map(function(el){
+		let videos = this.state.videos.map(function(el, index){
 			return (
-				<VideoComponent video={el} />
+				<VideoComponent key={index} video={el} />
 			);
 		});
 		return (
 			<div className="videos" id="videos">
         <div className="overlay">
           <div className="row">
-            <div className="large-4 columns large-offset-4">
-              <center><h2 >VIDEOS</h2></center><hr/>
-            </div>
+            {videos}
           </div>
-          {videos}
         </div>
       </div>
 		);
