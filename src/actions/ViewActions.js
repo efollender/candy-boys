@@ -1,6 +1,7 @@
 const AppDispatcher = require('../dispatcher/AppDispatcher');
 const { ActionTypes } = require('../constants/AppConstants');
 const FirebaseUtils = require('../utils/FirebaseUtils');
+const SoundcloudUtils = require('../utils/SoundcloudUtils');
 
 let ViewActions = {
   getTourDates(){
@@ -10,6 +11,36 @@ let ViewActions = {
         data: FirebaseUtils.toArray(snapshot.val())
       });
     });
+  },
+  getTrackEmbed(url){
+		SoundcloudUtils.getTrack(url)
+			.then(function(response){
+				AppDispatcher.handleViewAction({
+	        actionType: ActionTypes.GET_EMBED_LINK,
+	        data: response.data
+      	});
+			})
+			.catch(function(error){
+				AppDispatcher.handleViewAction({
+	        actionType: ActionTypes.GET_EMBED_LINK_ERROR,
+	        data: error.message
+      	});
+			});
+  },
+  getTracks(){
+  	SoundcloudUtils.getTracks()
+  		.then(function(response){
+  			AppDispatcher.handleViewAction({
+  				actionType: ActionTypes.GET_SC_SONGS_SUCCESS,
+  				data: response.data
+  			});
+  		})
+  		.catch(function(error){
+  			AppDispatcher.handleViewAction({
+  				actionType: ActionTypes.GET_SC_SONGS_ERROR,
+  				err: error.message
+  			});
+  		});
   },
   getVideos(){
     FirebaseUtils.homeInstance().child('CandyData/videos').on('value', function(snapshot){

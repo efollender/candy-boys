@@ -43,7 +43,7 @@ let FirebaseStore = objAssign({}, EventEmitter.prototype, {
 
 AppDispatcher.register(function(payload){
 	var action = payload.action;
-	console.log('action!', action);
+	
 	switch (action.actionType){
 		case ActionTypes.LOGIN_SUCCESS:
 			FirebaseStore.setAuth(action.data);
