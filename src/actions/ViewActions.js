@@ -12,24 +12,10 @@ let ViewActions = {
       });
     });
   },
-  getTrackEmbed(url){
-		SoundcloudUtils.getTrack(url)
-			.then(function(response){
-				AppDispatcher.handleViewAction({
-	        actionType: ActionTypes.GET_EMBED_LINK,
-	        data: response.data
-      	});
-			})
-			.catch(function(error){
-				AppDispatcher.handleViewAction({
-	        actionType: ActionTypes.GET_EMBED_LINK_ERROR,
-	        data: error.message
-      	});
-			});
-  },
   getTracks(){
   	SoundcloudUtils.getTracks()
   		.then(function(response){
+  			console.log(response);
   			AppDispatcher.handleViewAction({
   				actionType: ActionTypes.GET_SC_SONGS_SUCCESS,
   				data: response.data

@@ -2,7 +2,6 @@ const React = require('react');
 const ViewActions = require('../actions/ViewActions');
 const SCTrack = require('./SCTrack');
 const SoundcloudStore = require('../stores/SoundcloudStore');
-const SoundcloudUtils = require('../utils/SoundcloudUtils');
 
 let Soundcloud = React.createClass({
 	getInitialState(){
