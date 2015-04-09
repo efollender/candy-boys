@@ -17,23 +17,22 @@ let EditTour = React.createClass({
 		this.setState(FirebaseStore.getState());
 	},
 	removeDate(date){
-		return function(event) {
+		return function(date) {
 			ViewActions.removeDate(date);
 		}
 	},
 	handleKeyDown(index){
-		
 			if(event.keyCode == 13){
-				// ViewActions.addDate({
-				// 	city: '',
-		  // 		date: {
-		  // 			day: '',
-		  // 			month: '',
-		  // 			year: '' 
-		  // 		},
-		  // 		state: '',
-		  // 		venue: ''
-				// });
+				ViewActions.addDate({
+					city: React.findDOMNode(this.refs.city).value(),
+			  		date: {
+			  			day: '',
+			  			month: '',
+			  			year: '' 
+			  		},
+			  		state: React.findDOMNode(this.refs.state).value(),
+			  		venue: ''
+				}.bind(this));
 			}
 	},
 	tourDates(){
@@ -61,8 +60,8 @@ let EditTour = React.createClass({
 						<td colSpan="3">Add New</td>
 					</tr>
 					<tr className="new-date">
-						<td><input ref="date" onKeyDown={this.handleKeyDown} type="text" /></td>
-						<td><input onKeyDown={this.handleKeyDown} type="text" /></td>
+						<td><input ref="city" onKeyDown={this.handleKeyDown} type="text" /></td>
+						<td><input ref="state" onKeyDown={this.handleKeyDown} type="text" /></td>
 					</tr>
 				</table>
 			</div>
