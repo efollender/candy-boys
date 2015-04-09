@@ -6,7 +6,7 @@ const Tour = require('../components/TourContainer');
 const Home = require('../components/Home');
 const AdminContainer = require('../components/AdminContainer');
 const Login = require('../components/Login');
-const Navigation = require('../components/Navigation');
+const Dashboard = require('../components/Dashboard');
 let Videos = require('../components/VideoContainer');
 let Soundcloud = require('../components/Soundcloud');
 
@@ -16,7 +16,7 @@ module.exports = (
     <Route name="soundcloud" path="/soundcloud" handler={Soundcloud} />
     <Route name="videos" path="/videos" handler={Videos} />
     <Route name="admin" path="/admin" handler={AdminContainer}>
-    	<DefaultRoute name="dashboard" handler={Navigation} />
+    	<DefaultRoute name="dashboard" handler={Dashboard} />
     </Route>
     <DefaultRoute name="home" handler={Home} />
   </Route>
