@@ -4,6 +4,9 @@ const FirebaseUtils = require('../utils/FirebaseUtils');
 const SoundcloudUtils = require('../utils/SoundcloudUtils');
 
 let ViewActions = {
+	addDate(){
+
+	},
   getTourDates(){
     FirebaseUtils.homeInstance().child('CandyData/tourDates').on('value', function(snapshot){
       AppDispatcher.handleViewAction({
@@ -53,6 +56,12 @@ let ViewActions = {
   	AppDispatcher.handleViewAction({
   		actionType: ActionTypes.LOGOUT
   	});
+  },
+  removeDate(date){
+  	FirebaseUtils.removeDate(date);
+		AppDispatcher.handleViewAction({
+			actionType: ActionTypes.REMOVE_DATE
+		});
   }
 };
 

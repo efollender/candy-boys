@@ -16,8 +16,14 @@ let firebaseUtils = {
 		  }
 		});
   },
+  addDate(date){
+  	this.homeInstance().child('CandyData/tourDates').push(date);
+	},	
+	removeDate(date){
+		// this.homeInstance().child('CandyData/tourDates/' + date).set(null);
+	},
   isLoggedIn(){
-    return cachedUser && true || this.homeInstance().getAuth() || false;
+    return this.homeInstance().getAuth() || false;
   },
   logout(){
   	this.homeInstance().unauth();

@@ -22,6 +22,7 @@ let AdminContainer = React.createClass({
 		return (
 			<div id="admin-view" className="row">
 				{this.state.isLoggedIn ? <Logout /> : <Login />}
+				<RouteHandler />
 			</div>
 		);
 	}

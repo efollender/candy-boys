@@ -5,7 +5,6 @@ let SCTrack = React.createClass({
 	componentDidMount(){
 		SoundcloudUtils.getTrack(this.props.track.uri)
 		.then(function(response){
-			console.log('got track')
 			document.getElementById(this.props.track.id).innerHTML = response.data.html;
 		}.bind(this))
 		.catch(function(err){

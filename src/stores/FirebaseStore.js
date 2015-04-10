@@ -9,7 +9,7 @@ let _state = {
 	dates: [],
 	videos: [],
 	links: {},
-	isLoggedIn: FirebaseUtils.homeInstance().getAuth()
+	isLoggedIn: null
 };
 
 let FirebaseStore = objAssign({}, EventEmitter.prototype, {
@@ -46,7 +46,8 @@ AppDispatcher.register((payload) => {
 
 	switch (action.actionType){
 		case ActionTypes.LOGIN_SUCCESS:
-			FirebaseStore.setAuth();
+			console.log('logged in');
+			FirebaseStore.setAuth(action.data);
 			break;
 		case ActionTypes.LOGOUT:
 			FirebaseStore.setAuth(null);
