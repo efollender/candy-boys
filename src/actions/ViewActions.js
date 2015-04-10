@@ -15,7 +15,6 @@ let ViewActions = {
   getTracks(){
   	SoundcloudUtils.getTracks()
   		.then(function(response){
-  			console.log(response);
   			AppDispatcher.handleViewAction({
   				actionType: ActionTypes.GET_SC_SONGS_SUCCESS,
   				data: response.data

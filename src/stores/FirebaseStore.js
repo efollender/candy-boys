@@ -17,7 +17,7 @@ let FirebaseStore = objAssign({}, EventEmitter.prototype, {
 		return _state;
 	},
 	setAuth(user){
-		_state.isLoggedIn = user;
+		_state.isLoggedIn = user || FirebaseUtils.homeInstance().getAuth();
 		this.emit(CHANGE_EVENT);
 	},
 	setDates(dates){
@@ -26,7 +26,6 @@ let FirebaseStore = objAssign({}, EventEmitter.prototype, {
 	},
 	setVideos(videos){
 		_state.videos = videos;
-		console.log('videos', videos);
 		this.emit(CHANGE_EVENT);
 	},
 	setLinks(links){
@@ -41,12 +40,13 @@ let FirebaseStore = objAssign({}, EventEmitter.prototype, {
 	}
 });
 
-AppDispatcher.register(function(payload){
-	var action = payload.action;
-	
+AppDispatcher.register((payload) => {
+
+  let { action } = payload;
+
 	switch (action.actionType){
 		case ActionTypes.LOGIN_SUCCESS:
-			FirebaseStore.setAuth(action.data);
+			FirebaseStore.setAuth();
 			break;
 		case ActionTypes.LOGOUT:
 			FirebaseStore.setAuth(null);
@@ -60,9 +60,8 @@ AppDispatcher.register(function(payload){
 		case ActionTypes.GET_LINKS:
 			FirebaseStore.setLinks(action.data);
 			break;
-		default:
-			return true;
 	}
+
 });
 
 module.exports = FirebaseStore;

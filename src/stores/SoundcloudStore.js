@@ -4,21 +4,21 @@ const { EventEmitter } = require('events');
 const objAssign = require('react/lib/Object.assign');
 let CHANGE_EVENT = 'CHANGE_EVENT';
 
-let _SCstate = {
+let _state = {
 	tracks: [],
 	loaded: null
 };
 
 let SoundCloudStore = objAssign({}, EventEmitter.prototype, {
 	getState(){
-		return _SCstate;
+		return _state;
 	},
 	setTracks(tracks){
-		_SCstate.tracks = tracks;
+		_state.tracks = tracks;
 		this.emit(CHANGE_EVENT);
 	},
 	setLoaded(val){
-		_SCstate.loaded = val;
+		_state.loaded = val;
 		this.emit(CHANGE_EVENT);
 	},
 	addChangeListener(cb){
@@ -39,12 +39,10 @@ AppDispatcher.register((payload) => {
   		console.log('success!');
   		break;
   	case ActionTypes.GET_SC_SONGS_ERROR:
-  	  SoundCloudStore.setLoaded(true);
-  	  console.log(action.err);
+	  	SoundCloudStore.setLoaded(true);
+	  	console.log(action.err);
   		break;
   }
-
-  SoundCloudStore.emit(CHANGE_EVENT);
 });
 
 module.exports = SoundCloudStore;

@@ -4,7 +4,7 @@ const { SoundCloud } = require('../constants/AppConstants');
 let SoundCloudUtils = {
 	getTracks(){
 		console.log('called gettracks')
-		return axios.get(`${SoundCloud.API}/users/${SoundCloud.USER}/tracks?client_id=${SoundCloud.CLIENT_ID}`);
+		return axios.get(`${SoundCloud.API}users/${SoundCloud.USER}/tracks?client_id=${SoundCloud.CLIENT_ID}`);
 	},
 	getTrack(trackLink){
 		console.log(trackLink);
