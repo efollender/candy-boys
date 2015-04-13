@@ -1,5 +1,6 @@
 const React = require('react');
-const Navigation = require('./Navigation');
+const Router = require('react-router');
+const {RouteHandler} = Router;
 
 let Home = React.createClass({
 	render(){

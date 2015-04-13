@@ -12,9 +12,8 @@ let SCTrack = React.createClass({
 		});
 	},
 	render(){
-		let track = this.props.track;
 		return (
-			<div className="large-4 columns" id={track.id}></div>
+			<div className="large-4 columns" id={this.props.track.id}></div>
 		);
 	}
 });

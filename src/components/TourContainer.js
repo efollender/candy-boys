@@ -18,7 +18,7 @@ let TourContainer = React.createClass({
 		this.setState(FirebaseStore.getState());
 	},
 	render(){
-		console.log('state?',this.state.dates);
+		console.log('date state?',this.state.dates);
 		let tourDates = this.state.dates.map(function(el, index){
 			return (
 				<TourDate key={index} date={el} />
@@ -26,10 +26,10 @@ let TourContainer = React.createClass({
 		});
 		return (
 			<div id="tourdates-wrap" className="row">
-        <div id="tourdates" className="tour-dates">
-          {tourDates}
-        </div>
-      </div>
+		        <div id="tourdates" className="tour-dates">
+		        	{tourDates}
+		        </div>
+	      </div>
 		);
 	}
 });
