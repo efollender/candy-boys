@@ -23,14 +23,16 @@ let Navigation = React.createClass({
 		this.setState(FirebaseStore.getState());
 	},
 	render(){
-		let links = Object.keys(this.state.links).map(function(key, value){
-			let current = this.state.links.key;
-			return (
-				<li>
-					<a>{current.value}</a>
-				</li>
-			);
-		});
+		let links = Object.keys(this.state.links).map(function(key, index){
+			let current = this.state.links[key];
+			if (current.onNavMenu){
+				return (
+					<li>
+						<a href={current.url}>{current.title}</a>
+					</li>
+				);
+			}
+		}.bind(this));
 		return (
       <ul className="side-nav">
         <li><h1><a href="#"><img src="images/candy-flat.png"/></a></h1></li>
