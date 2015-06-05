@@ -7,7 +7,7 @@ let Home = React.createClass({
 		return (
       <div id="jumbotron" className="row">
         <div className="large-4 small-12 large-offset-4 columns">
-        	<Navigation />
+        	<RouteHandler />
         </div>
       </div>
 		);

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "repository": "",
-  "author": "Tyler McGinnis",
+  "author": "Emma Follender",
   "dependencies": {
     "axios": "^0.4.2",
     "events": "^1.0.2",

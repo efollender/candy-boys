@@ -9,6 +9,7 @@ const Login = require('../components/Login');
 const Dashboard = require('../components/Dashboard');
 let Videos = require('../components/VideoContainer');
 let Soundcloud = require('../components/Soundcloud');
+let Navigation = require('../components/Navigation');
 
 module.exports = (
   <Route name="app" path="/" handler={App}>

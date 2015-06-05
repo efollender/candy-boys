@@ -6,21 +6,11 @@ let TourDate = React.createClass({
 		let venue = date.venue || 'TBA';
 		let formattedDate = date.date.month + " " + date.date.day;
 		return (
-			<div className="small-4 columns tourDate">
-		        <div className="cube rotate labels">
-		              <span className="top side"></span>
-		              <span className="left side">
-		              	 <h4>{ date.city }, { date.state }</h4>
-		              </span>
-		              <span className="right side">
-		             	<p>@ { venue }<br/>
-				        	{ formattedDate }
-				        </p>
-		              </span>
-		              <span className="bottom side">
-		                <span className="back side"></span>
-		              </span>
-		          </div>
+			<div className="small-12 large-4 columns tourDate">
+		        <h4>{ date.city }, { date.state }</h4>
+             	<p>@ { venue }<br/>
+		        	{ formattedDate }
+		        </p>
 		    </div>
 		);
 	}
