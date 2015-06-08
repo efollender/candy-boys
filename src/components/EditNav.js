@@ -18,10 +18,11 @@ let EditNav = React.createClass({
 	},
 	menuItems(){
 		return Object.keys(this.state.links).map(function(key, value){
-			let link = this.state.links[key];
+			let link = this.state.links[key]['url'];
+			let title = this.state.links[key]['title'];
 			return (
 				<tr key={value}>
-					<td>{key}</td>
+					<td>{title}</td>
 					<td>{link}</td>
 				</tr>
 			)

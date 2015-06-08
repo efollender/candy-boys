@@ -10,7 +10,7 @@ let Main = React.createClass({
     },
 	render(){
 		return (
-			<div className="pageslider-container container">
+			<div className="grid-frame pageslider-container container">
 				<RouteHandler />
 			</div>
 		);

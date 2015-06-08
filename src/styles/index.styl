@@ -1,4 +1,4 @@
-@import 'http://cdnjs.cloudflare.com/ajax/libs/foundation/5.3.3/css/foundation.min.css'
+@import 'http://cdn.jsdelivr.net/zurb/foundation-apps-1.0.2.min.css'
 
 nav-colors = (#3400A3 #ff0044 #FFD600 #4FDB00 #00ABCC)
 
@@ -121,23 +121,6 @@ footer
           background-color nav-colors[i]
         a
           color nav-colors[i]
-    // &:nth-child(5n+2)
-    //   &:before
-    //     background-color #ff0044
-    // &:nth-child(5n+3)
-    //   &:before
-    //     background-color #FFD600
-    // &:nth-child(5n+4)
-    //   &:before
-    //     background-color #4FDB00
-    // &:nth-child(5n+0)
-    //   &:before
-    //     background-color #00ABCC
-    // &:nth-child(5n+1)
-    //   a
-    //     color #3400A3
-    //   &:before
-    //     background-color #3400A3
     a
       font-size 1.6rem
       transition all .1s ease-in-out
@@ -161,3 +144,9 @@ footer
     width 100%
   a
     color white
+.admin-nav
+  ul
+    list-style-type none
+  li
+    float left
+    display inline-block
