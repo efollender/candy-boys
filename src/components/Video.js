@@ -13,11 +13,10 @@ let VideoComponent = React.createClass({
 		let video = this.props.video;
 		return (
 			<div className="large-4 small-12 columns">
-	      <div className="flex-video">
-	        <iframe width="420" height="315" src={this.embedUrl(video.url)} frameBorder="0" allowFullScreen></iframe>
-	      </div>
-	      <p>{video.title}</p>
-     	</div>
+		      <p>
+		      	<a href={this.embedUrl(video.url)} target="iframe">{video.title}</a>
+		      </p>
+     		</div>
 		);
 	}
 });

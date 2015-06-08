@@ -25,12 +25,15 @@ let VideoContainer = React.createClass({
 		});
 		return (
 			<div className="videos" id="videos">
-        <div className="overlay">
-          <div className="row">
-            {videos}
-          </div>
-        </div>
-      </div>
+		        <div className="overlay">
+		          <div className="row">
+		          	<div className="flex-video large-12 columns">
+				        <iframe id="large-video" width="420" height="315" src="#" frameBorder="0" allowFullScreen></iframe>
+				     </div>
+		            {videos}
+		          </div>
+		        </div>
+		     </div>
 		);
 	}
 });
