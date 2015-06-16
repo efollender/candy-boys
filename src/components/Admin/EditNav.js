@@ -1,14 +1,29 @@
 const React = require('react');
-const ClickToEdit = require('../../mixins/Editor');
+const ViewActions = require('../../actions/ViewActions');
+const FirebaseStore = require('../../stores/FirebaseStore');
 
 let EditNav = React.createClass({
+	getInitialState(){
+		return FirebaseStore.getState();
+	},
+	componentWillMount(){
+		ViewActions.getLinks();
+		FirebaseStore.addChangeListener(this._onChange);
+	},
+	componentWillUnmount(){
+		FirebaseStore.removeChangeListener(this._onChange);
+	},
+	_onChange(){
+		this.setState(FirebaseStore.getState());
+	},
 	menuItems(){
-		return Object.keys(this.props.items).map(function(key, value){
-			let link = this.props.items[key];
+		return Object.keys(this.state.links).map(function(key, value){
+			let link = this.state.links[key]['url'];
+			let title = this.state.links[key]['title'];
 			return (
 				<tr key={value}>
-					<td><ClickToEdit text={link.title}/></td>
-					<td><ClickToEdit text={link.url}/></td>
+					<td>{title}</td>
+					<td>{link}</td>
 				</tr>
 			)
 		}.bind(this));

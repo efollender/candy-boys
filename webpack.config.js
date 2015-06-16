@@ -15,8 +15,10 @@ module.exports = {
      	},
       {
         test: /\.styl$/,
-        loader: '!stylus-loader?paths=node_modules/foundation/stylus/'
-      }
+        loader: 'style-loader!css-loader!stylus-loader?paths=node_modules/foundation/stylus'
+      },
+      { test: /\.png$/, loader: "url-loader?limit=100000" },
+      { test: /\.jpg$/, loader: "file-loader" }
     ]
   }
 };
