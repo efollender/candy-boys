@@ -1,49 +1,64 @@
 const React = require('react');
-const EditTourDate = require('./EditTourDate');
 const ViewActions = require('../../actions/ViewActions');
+// const FirebaseStore = require('../../stores/FirebaseStore');
+let Table = React.createFactory(require('react-bootstrap/lib/factories/Table'));
 
 let EditTour = React.createClass({
-	removeDate(date){
-		return function(date) {
-			ViewActions.removeDate(date);
-		}
-	},
+	// getInitialState(){
+	// 	return FirebaseStore.getState();
+	// },
+	// componentWillMount(){
+	// 	ViewActions.getTourDates();
+	// 	FirebaseStore.addChangeListener(this._onChange);
+	// },
+	// componentWillUnmount(){
+	// 	FirebaseStore.removeChangeListener(this._onChange);
+	// },
+	// _onChange(){
+	// 	this.setState(FirebaseStore.getState());
+	// },
+	// removeDate(date){
+	// 	return function(date) {
+	// 		ViewActions.removeDate(date);
+	// 	}
+	// },
 	handleKeyDown(index){
-		if(event.keyCode == 13){
-			ViewActions.addDate({
-				city:this.refs.city.getDOMNode().value,
-		  		date: {
-		  			day: '',
-		  			month: '',
-		  			year: '' 
-		  		},
-		  		state:this.refs.state.getDOMNode().value,
-		  		venue: ''
-			}.bind(this));
-		}
+			if(event.keyCode == 13){
+				ViewActions.addDate({
+					city: React.findDOMNode(this.refs.city).value(),
+			  		date: {
+			  			day: '',
+			  			month: '',
+			  			year: '' 
+			  		},
+			  		state: React.findDOMNode(this.refs.state).value(),
+			  		venue: ''
+				}.bind(this));
+			}
 	},
-	componentWillUpdate(){
-		console.log(this.props.dates);
-	},
-	handleChange(index, child){
-		console.log('chanksdjfhsakjfh')
-		this.props.dates[index] = child.state;
-	},
-	render(){
-		let tourDates = this.props.dates.map(function(key, index){
+	tourDates(){
+		return this.state.dates.map(function(key, index){
 			return (
-				<EditTourDate date={key} key={index} onChange={this.handleChange.bind(this, index)}/>
+				<tr key={index}>
+					<td>{key.date}</td>
+					<td>{key.venue}</td>
+					<td> x. </td>
+				</tr>
 			);
 		}.bind(this));
+	},
+	render(){
 		return (
-			<div>
-				<table>
+			<table>
+				<thead>
 					<tr>
 						<th>{"Date"}</th>
 						<th>Venue</th>
-						<th>Add/Remove</th>
+						<th>Options</th>
 					</tr>
-					{tourDates}
+				</thead>
+				<tbody>
+					
 					<tr>
 						<td colSpan="3">Add New</td>
 					</tr>
@@ -51,8 +66,8 @@ let EditTour = React.createClass({
 						<td><input ref="city" onKeyDown={this.handleKeyDown} type="text" /></td>
 						<td><input ref="state" onKeyDown={this.handleKeyDown} type="text" /></td>
 					</tr>
-				</table>
-			</div>
+				</tbody>
+			</table>
 		);
 	}
 });
