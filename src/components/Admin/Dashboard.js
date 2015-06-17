@@ -9,22 +9,6 @@ const EditVideos = require('./EditVideos');
 const Auth = require('../../mixins/Auth');
 
 let DashboardComponent = React.createClass({
-	
-	getInitialState(){
-		return FirebaseStore.getState();
-	},
-	componentWillMount(){
-		ViewActions.getTourDates();
-		ViewActions.getVideos();
-		ViewActions.getLinks();
-		FirebaseStore.addChangeListener(this._onChange);
-	},
-	componentWillUnmount(){
-		FirebaseStore.removeChangeListener(this._onChange);
-	},
-	_onChange(){
-		this.setState(FirebaseStore.getState());
-	},
 	render(){
 		return (
 			<div className="grid-block admin-dashboard">
