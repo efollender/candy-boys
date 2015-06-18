@@ -33,10 +33,10 @@ let Navigation = React.createClass({
 		}.bind(this));
 		return (
       <ul className="side-nav">
-        <li id="logo"><h1><a href="#"><img src="images/candy-flat.png"/></a></h1></li>
-        <li id="tour-link"><a href="#tour">Tour</a></li>
-        <li id="soundcloud"><a href="#soundcloud">Soundcloud</a></li>
-        <li id="videos-link"><a href="#videos">Videos</a></li>
+        <li id="logo"><h1><a href="#/#"><img src="images/candy-flat.png"/></a></h1></li>
+        <li id="tour-link"><a href="#/#tour">Tour</a></li>
+        <li id="soundcloud"><a href="#/#soundcloud">Soundcloud</a></li>
+        <li id="videos-link"><a href="#/#videos">Videos</a></li>
         {links}
       </ul>
 		);

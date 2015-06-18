@@ -6,25 +6,34 @@ let injectTapEventPlugin = require("react-tap-event-plugin");
 let TextField = mui.TextField;
 let RaisedButton = mui.RaisedButton;
 let DatePicker = mui.DatePicker;
+let EditTourDate = require('./EditTourDate');
 
 let EditTour = React.createClass({
 	getInitialState(){
 		return FirebaseStore.getState();
 	},
 	componentWillMount(){
-		injectTapEventPlugin();
-		ViewActions.getTourDates();
 		FirebaseStore.addChangeListener(this._onChange);
+	},
+	componentDidMount(){
+		ViewActions.getTourDates();
+	},
+	componentDidUpdate(){
+		//ViewActions.getTourDates();
 	},
 	componentWillUnmount(){
 		FirebaseStore.removeChangeListener(this._onChange);
 	},
 	_onChange(){
-		ViewActions.getTourDates();
 		this.setState(FirebaseStore.getState());
 	},
 	removeDate(date){
 		ViewActions.removeDate(date);
+		let newDates = this.state.dates;
+		newDates.splice(date, 1);
+		this.setState({
+			dates: newDates
+		});
 	},
 	handleKeyDown(index){
 			if(event.keyCode == 13){
@@ -40,36 +49,8 @@ let EditTour = React.createClass({
 				}.bind(this));
 			}
 	},
-	getMonthFromString(mon){
-   		return new Date(Date.parse(mon +" 1, 2012")).getMonth()+1;
-	},
-	getDateObject(stringDate){
-		let month = this.getMonthFromString(stringDate.month);
-		return new Date(month + "/"+stringDate.day+"/2014");
-
-	},
-	tourDates(dates){
-		return dates.map(function(key, index){
-			console.log(key);
-			return (
-				<tr key={index}>
-					<td>
-						<DatePicker
-							mode="portrait"
-							defaultDate={this.getDateObject(key.date)}
-						  	hintText="Date" />
-					</td>
-					<td>
-						<TextField
-							defaultValue={key.venue}
-						/>
-					</td>
-					<td><RaisedButton primary={true} label="Remove Date" onClick={this.removeDate.bind(this, index)}/></td>
-				</tr>
-			);
-		}.bind(this));
-	},
 	render(){
+
 		return (
 			<div>
 				<table>
@@ -81,18 +62,9 @@ let EditTour = React.createClass({
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td colSpan="3">Add New</td>
-						</tr>
 						<tr className="new-date">
-							<td>
-								<TextField hintText="City" ref="city" onKeyDown={this.handleKeyDown} />
-							</td>
-							<td>
-								<TextField hintText="State" ref="state" onKeyDown={this.handleKeyDown} />
-							</td>
-							<td>
-								<RaisedButton style={styles.button} label="Add Date"/>
+							<td colSpan="3">
+								<RaisedButton key="add-date" label="Add Date"/>
 							</td>
 						</tr>
 						{!this.state.loaded &&
@@ -100,8 +72,11 @@ let EditTour = React.createClass({
 								<td colSpan="3" className="loading-state" data-loading-message="Loading&nbsp;tour...">Loading tour...</td>
 							</tr>
 						}
-						{this.state &&
-							this.tourDates(this.state.dates)
+						{this.state.dates &&
+							this.state.dates.map((key, index)=>{
+								console.log(index);
+								return <EditTourDate onClick={this.removeDate.bind(this, index)} date={key} key={index} />
+							})
 						}
 					</tbody>
 				</table>
@@ -110,11 +85,5 @@ let EditTour = React.createClass({
 	}
 });
 
-let styles = {
-	button: {
-		backgroundColor: "green",
-		fontSize: "2rem"
-	}
-};
 
 module.exports = EditTour;

@@ -5,7 +5,7 @@ const {RouteHandler} = Router;
 let Main = React.createClass({
 	render(){
 		return (
-			<div className="grid-frame home container">
+			<div className="home">
 				<RouteHandler/>
 			</div>
 		);

@@ -1,6 +1,8 @@
 const React = require('react');
 const Jumbotron = require('./Jumbotron');
 const Tour = require('./TourContainer');
+const Soundcloud = require('./Soundcloud');
+let css = require('../styles/index.styl'); 
 
 
 let Home = React.createClass({
@@ -9,6 +11,7 @@ let Home = React.createClass({
 		<div>
 	      <Jumbotron/>
 	      <Tour/>
+	      <Soundcloud/>
       	</div>
 		);
 	}

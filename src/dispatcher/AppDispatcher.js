@@ -9,7 +9,7 @@ let AppDispatcher = assign(new Dispatcher(), {
       source: PayloadSources.SERVER_ACTION,
       action: action
     };
-    this.dispatch(payload);
+    //this.dispatch(payload);
   },
 
   handleViewAction (action) {

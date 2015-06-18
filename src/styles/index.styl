@@ -1,5 +1,5 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,300,500);
-@import url(https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.2/css/foundation.min.css)
+// @import url(https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.2/css/foundation.min.css)
 
 nav-colors = (#3400A3 #ff0044 #FFD600 #4FDB00 #00ABCC)
 
@@ -97,7 +97,7 @@ footer
     left 0
     right 0
     bottom 0
-    background rgba(white, .5)
+    background rgba(white, .25)
 .home-nav-container
   margin 1em 0
 .side-nav
@@ -159,6 +159,7 @@ footer
   position relative
   font-size 2.5rem
   display inline-block
+  color transparent
   &:after
     position absolute
     content attr(data-loading-message)
@@ -173,7 +174,11 @@ footer
     overflow hidden
     max-width 100%
     width 100%
-    
+tr
+  opacity 1
+  transition all .1s linear
+.remove
+  opacity 0
 @keyframes loading-state
   0%
     max-width 100%

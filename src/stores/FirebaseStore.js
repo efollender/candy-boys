@@ -43,6 +43,7 @@ let FirebaseStore = objAssign({}, EventEmitter.prototype, {
 	removeDate(date){
 		FirebaseUtils.removeDate(date, ()=>{
 			console.log('change!');
+			this.emit(CHANGE_EVENT);
 		});
 	}
 });
