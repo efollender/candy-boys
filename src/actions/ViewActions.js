@@ -58,9 +58,9 @@ let ViewActions = {
   	});
   },
   removeDate(date){
-  	FirebaseUtils.removeDate(date);
 		AppDispatcher.handleViewAction({
-			actionType: ActionTypes.REMOVE_DATE
+			actionType: ActionTypes.REMOVE_DATE,
+      data: date
 		});
   }
 };

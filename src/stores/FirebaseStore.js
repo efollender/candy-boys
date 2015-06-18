@@ -9,7 +9,8 @@ let _state = {
 	dates: [],
 	videos: [],
 	links: {},
-	isLoggedIn: null
+	isLoggedIn: null,
+	loaded: false
 };
 
 let FirebaseStore = objAssign({}, EventEmitter.prototype, {
@@ -22,6 +23,7 @@ let FirebaseStore = objAssign({}, EventEmitter.prototype, {
 	},
 	setDates(dates){
 		_state.dates = dates;
+		_state.loaded = true;
 		this.emit(CHANGE_EVENT);
 	},
 	setVideos(videos){
@@ -37,6 +39,11 @@ let FirebaseStore = objAssign({}, EventEmitter.prototype, {
 	},
 	removeChangeListener(cb){
 		this.removeListener(CHANGE_EVENT, cb);
+	},
+	removeDate(date){
+		FirebaseUtils.removeDate(date, ()=>{
+			console.log('change!');
+		});
 	}
 });
 
@@ -60,6 +67,9 @@ AppDispatcher.register((payload) => {
 			break;
 		case ActionTypes.GET_LINKS:
 			FirebaseStore.setLinks(action.data);
+			break;
+		case ActionTypes.REMOVE_DATE:
+			FirebaseStore.removeDate(action.data);
 			break;
 	}
 

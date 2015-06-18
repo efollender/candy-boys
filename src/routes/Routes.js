@@ -17,10 +17,7 @@ let EditVideos = require('../components/Admin/EditVideos');
 
 module.exports = (
   <Route name="app" path="/" handler={App}>
-    <Route name="main-navigation" handler={Navigation} />
-    <Route name="tour" path="/tour" handler={Tour} />
-    <Route name="soundcloud" path="/soundcloud" handler={Soundcloud} />
-    <Route name="videos" path="/videos" handler={Videos} />
+    <DefaultRoute name="home" handler={Home}/>
     <Route name="admin" path="/admin" handler={AdminContainer}>
     	<Route path="/dashboard" name="dashboard" handler={Dashboard}>
         <Route path="/edit-nav" name="edit-nav" handler={EditNav} />

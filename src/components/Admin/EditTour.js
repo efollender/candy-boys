@@ -20,12 +20,11 @@ let EditTour = React.createClass({
 		FirebaseStore.removeChangeListener(this._onChange);
 	},
 	_onChange(){
+		ViewActions.getTourDates();
 		this.setState(FirebaseStore.getState());
 	},
 	removeDate(date){
-		return function(date) {
-			ViewActions.removeDate(date);
-		}
+		ViewActions.removeDate(date);
 	},
 	handleKeyDown(index){
 			if(event.keyCode == 13){
@@ -51,6 +50,7 @@ let EditTour = React.createClass({
 	},
 	tourDates(dates){
 		return dates.map(function(key, index){
+			console.log(key);
 			return (
 				<tr key={index}>
 					<td>
@@ -64,11 +64,10 @@ let EditTour = React.createClass({
 							defaultValue={key.venue}
 						/>
 					</td>
-					<td><RaisedButton label="Remove Date" /></td>
+					<td><RaisedButton primary={true} label="Remove Date" onClick={this.removeDate.bind(this, index)}/></td>
 				</tr>
 			);
 		}.bind(this));
-		return allDates;
 	},
 	render(){
 		return (
@@ -92,7 +91,15 @@ let EditTour = React.createClass({
 							<td>
 								<TextField hintText="State" ref="state" onKeyDown={this.handleKeyDown} />
 							</td>
+							<td>
+								<RaisedButton style={styles.button} label="Add Date"/>
+							</td>
 						</tr>
+						{!this.state.loaded &&
+							<tr>
+								<td colSpan="3" className="loading-state" data-loading-message="Loading&nbsp;tour...">Loading tour...</td>
+							</tr>
+						}
 						{this.state &&
 							this.tourDates(this.state.dates)
 						}
@@ -102,5 +109,12 @@ let EditTour = React.createClass({
 		);
 	}
 });
+
+let styles = {
+	button: {
+		backgroundColor: "green",
+		fontSize: "2rem"
+	}
+};
 
 module.exports = EditTour;

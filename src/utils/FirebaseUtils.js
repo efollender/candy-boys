@@ -19,8 +19,8 @@ let firebaseUtils = {
   addDate(date){
   	this.homeInstance().child('CandyData/tourDates').push(date);
 	},	
-	removeDate(date){
-		// this.homeInstance().child('CandyData/tourDates/' + date).set(null);
+	removeDate(date, cb){
+		this.homeInstance().child('CandyData/tourDates/' + date).set(null, cb);
 	},
   isLoggedIn(){
     return this.homeInstance().getAuth() || false;
