@@ -1,6 +1,7 @@
 const React = require('react');
 const ViewActions = require('../../actions/ViewActions');
 const FirebaseStore = require('../../stores/FirebaseStore');
+const FirebaseUtils = require('../../utils/FirebaseUtils');
 const mui = require('material-ui');
 let injectTapEventPlugin = require("react-tap-event-plugin");
 let TextField = mui.TextField;
@@ -18,9 +19,6 @@ let EditTour = React.createClass({
 	componentDidMount(){
 		ViewActions.getTourDates();
 	},
-	componentDidUpdate(){
-		//ViewActions.getTourDates();
-	},
 	componentWillUnmount(){
 		FirebaseStore.removeChangeListener(this._onChange);
 	},
@@ -31,9 +29,11 @@ let EditTour = React.createClass({
 		ViewActions.removeDate(date);
 		let newDates = this.state.dates;
 		newDates.splice(date, 1);
-		this.setState({
-			dates: newDates
-		});
+		FirebaseUtils.getTour((data)=>{
+			this.setState({
+				dates: data
+			});
+		})
 	},
 	handleKeyDown(index){
 			if(event.keyCode == 13){

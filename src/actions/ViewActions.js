@@ -8,10 +8,10 @@ let ViewActions = {
 
 	},
   getTourDates(){
-    FirebaseUtils.homeInstance().child('CandyData/tourDates').on('value', function(snapshot){
+    FirebaseUtils.getTour(function(data){
       AppDispatcher.handleViewAction({
         actionType: ActionTypes.LOAD_TOUR_DATES,
-        data: FirebaseUtils.toArray(snapshot.val())
+        data: data
       });
     });
   },

@@ -16,6 +16,11 @@ let firebaseUtils = {
 		  }
 		});
   },
+  getTour(cb){
+    this.homeInstance().child('CandyData/tourDates').on('value', (snapshot)=>{
+      cb(this.toArray(snapshot.val()));
+    });
+  },
   addDate(date){
   	this.homeInstance().child('CandyData/tourDates').push(date);
 	},	
@@ -38,3 +43,4 @@ let firebaseUtils = {
 };
 
 module.exports = firebaseUtils;
+
