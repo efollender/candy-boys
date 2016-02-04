@@ -15,7 +15,7 @@ let AdminContainer = React.createClass({
   },
 	render(){
 		return (
-			<div id="admin-view" className="row">
+			<div id="admin-view" className="">
 				<RouteHandler />
 			</div>
 		);

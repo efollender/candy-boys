@@ -1,7 +1,7 @@
 const React = require('react');
 const mui = require('material-ui');
 let injectTapEventPlugin = require("react-tap-event-plugin");
-let TextField = mui.TextField;
+let ListItem = mui.ListItem;
 let RaisedButton = mui.RaisedButton;
 let DatePicker = mui.DatePicker;
 
@@ -32,26 +32,27 @@ let EditTourDate = React.createClass({
 		}
 	},
 	render(){
-		let key = this.props.date;	
+		let show = this.props.date;	
 		return (
-				<tr ref="dateWrapper">
-					<td>
-						<DatePicker
-							mode="portrait"
-							ref="date"
-							defaultDate={this.getDateObject(key.date)}
-						  	hintText="Date" />
-					</td>
-					<td>
-						<TextField
-							defaultValue={key.venue}
-							ref="venue"
-						/>
-					</td>
-					<td><RaisedButton primary={true} label="Remove Date" onClick={this.props.onClick} /></td>
-				</tr>
+				<ListItem ref="dateWrapper"
+					secondaryText={show.city + ", " + show.state}
+					secondaryLines={2}
+					rightToggle={<RaisedButton label="Edit"/>}
+					>
+					<strong>{this.getDateObject(show.date).toDateString()}</strong> at <strong>{show.venue}</strong>
+				</ListItem>
 			);
 	}
 });
 
 module.exports = EditTourDate;
+
+// <DatePicker
+// 	mode="portrait"
+// 	ref="date"
+// 	defaultDate={this.getDateObject(show.date)}
+//   	hintText="Date" />
+// <TextField
+// 	defaultValue={show.venue}
+// 	ref="venue"
+// />

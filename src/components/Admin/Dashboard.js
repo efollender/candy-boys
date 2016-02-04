@@ -25,7 +25,7 @@ let DashboardComponent = React.createClass({
 	},
 	render(){
 		return (
-			<div className="grid-block admin-dashboard">
+			<div className="admin-dashboard">
 				<AppBar 
 					title='Candy Boys Admin' 
 					iconClassNameRight="muidocs-icon-navigation-expand-more"

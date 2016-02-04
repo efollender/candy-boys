@@ -7,6 +7,8 @@ let injectTapEventPlugin = require("react-tap-event-plugin");
 let TextField = mui.TextField;
 let RaisedButton = mui.RaisedButton;
 let DatePicker = mui.DatePicker;
+let List = mui.List;
+let CircularProgress = mui.CircularProgress;
 let EditTourDate = require('./EditTourDate');
 
 let EditTour = React.createClass({
@@ -35,51 +37,25 @@ let EditTour = React.createClass({
 			});
 		})
 	},
-	handleKeyDown(index){
-			if(event.keyCode == 13){
-				ViewActions.addDate({
-					city: React.findDOMNode(this.refs.city).value,
-			  		date: {
-			  			day: '',
-			  			month: '',
-			  			year: '' 
-			  		},
-			  		state: React.findDOMNode(this.refs.state).value,
-			  		venue: ''
-				}.bind(this));
-			}
-	},
 	render(){
 
 		return (
-			<div>
-				<table>
-					<thead>
-						<tr>
-							<th>{"Date"}</th>
-							<th>Venue</th>
-							<th>Options</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr className="new-date">
-							<td colSpan="3">
-								<RaisedButton key="add-date" label="Add Date"/>
-							</td>
-						</tr>
+			<div className="container">
+				
+						<div className="new-date">
+							<RaisedButton key="add-date" label="Add Date"/>
+						</div>
 						{!this.state.loaded &&
-							<tr>
-								<td colSpan="3" className="loading-state" data-loading-message="Loading&nbsp;tour...">Loading tour...</td>
-							</tr>
+							<CircularProgress mode="determinate" value={10} size={2} />
 						}
+						<List>
 						{this.state.dates &&
 							this.state.dates.map((key, index)=>{
 								console.log(index);
 								return <EditTourDate onClick={this.removeDate.bind(this, index)} date={key} key={index} />
 							})
 						}
-					</tbody>
-				</table>
+						</List>
 			</div>
 		);
 	}
